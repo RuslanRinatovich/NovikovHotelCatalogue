@@ -1,0 +1,28 @@
+﻿<Window x:Class="EduInstitutesApp.Windows.ServiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EduInstitutesApp.Windows"
+        mc:Ignorable="d"
+         Title="Оказываемые услуги" WindowStartupLocation="CenterScreen"   Height="160" Width="800" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="187" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Название" VerticalAlignment="Center" Grid.Row="0" Margin="20 0 0 0"  Grid.Column="0" Height="16" />
+
+        <TextBox Text="{Binding ServiceName}" Grid.Column="1" VerticalAlignment="Center" Grid.Row="0" Height="30" Margin="0,7" />
+
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="2" Margin="127,0,103,0" Width="162">
+            <Button IsDefault="True" Click="Accept_Click" MinWidth="60" Margin="5">OK</Button>
+            <Button IsCancel="True" MinWidth="60" Margin="5">Отмена</Button>
+        </StackPanel>
+    </Grid>
+</Window>

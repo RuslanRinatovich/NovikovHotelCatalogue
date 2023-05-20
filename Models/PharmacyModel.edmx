@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище PharmacyDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pharmacy">
+          <Key>
+            <PropertyRef Name="PharmacyId" />
+          </Key>
+          <Property Name="PharmacyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PharmacyName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Info" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Site" Type="nvarchar" MaxLength="50" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="WorkTimeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ServiceId" />
+          </Key>
+          <Property Name="ServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="ServicePharmacy">
+          <Key>
+            <PropertyRef Name="ServicePharmacyId" />
+          </Key>
+          <Property Name="ServicePharmacyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceId" Type="int" Nullable="false" />
+          <Property Name="PharmacyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkTime">
+          <Key>
+            <PropertyRef Name="WorkTimeId" />
+          </Key>
+          <Property Name="WorkTimeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkTime" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <Association Name="FK_Pharmacy_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Pharmacy">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pharmacy_WorkTime">
+          <End Role="WorkTime" Type="Self.WorkTime" Multiplicity="1" />
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTime">
+              <PropertyRef Name="WorkTimeId" />
+            </Principal>
+            <Dependent Role="Pharmacy">
+              <PropertyRef Name="WorkTimeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicePharmacy_Pharmacy">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="1" />
+          <End Role="ServicePharmacy" Type="Self.ServicePharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="PharmacyId" />
+            </Principal>
+            <Dependent Role="ServicePharmacy">
+              <PropertyRef Name="PharmacyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicePharmacy_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServicePharmacy" Type="Self.ServicePharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceId" />
+            </Principal>
+            <Dependent Role="ServicePharmacy">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PharmacyDBModelContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pharmacy" EntityType="Self.Pharmacy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicePharmacy" EntityType="Self.ServicePharmacy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkTime" EntityType="Self.WorkTime" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Pharmacy_Category" Association="Self.FK_Pharmacy_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pharmacy_WorkTime" Association="Self.FK_Pharmacy_WorkTime">
+            <End Role="WorkTime" EntitySet="WorkTime" />
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicePharmacy_Pharmacy" Association="Self.FK_ServicePharmacy_Pharmacy">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="ServicePharmacy" EntitySet="ServicePharmacy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicePharmacy_Service" Association="Self.FK_ServicePharmacy_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServicePharmacy" EntitySet="ServicePharmacy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PharmacyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Pharmacies" Relationship="Self.FK_Pharmacy_Category" FromRole="Category" ToRole="Pharmacy" />
+        </EntityType>
+        <EntityType Name="Pharmacy">
+          <Key>
+            <PropertyRef Name="PharmacyId" />
+          </Key>
+          <Property Name="PharmacyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PharmacyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Info" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Site" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="WorkTimeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Pharmacy_Category" FromRole="Pharmacy" ToRole="Category" />
+          <NavigationProperty Name="WorkTime" Relationship="Self.FK_Pharmacy_WorkTime" FromRole="Pharmacy" ToRole="WorkTime" />
+          <NavigationProperty Name="ServicePharmacies" Relationship="Self.FK_ServicePharmacy_Pharmacy" FromRole="Pharmacy" ToRole="ServicePharmacy" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ServiceId" />
+          </Key>
+          <Property Name="ServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServicePharmacies" Relationship="Self.FK_ServicePharmacy_Service" FromRole="Service" ToRole="ServicePharmacy" />
+        </EntityType>
+        <EntityType Name="ServicePharmacy">
+          <Key>
+            <PropertyRef Name="ServicePharmacyId" />
+          </Key>
+          <Property Name="ServicePharmacyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <Property Name="PharmacyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pharmacy" Relationship="Self.FK_ServicePharmacy_Pharmacy" FromRole="ServicePharmacy" ToRole="Pharmacy" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_ServicePharmacy_Service" FromRole="ServicePharmacy" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkTime">
+          <Key>
+            <PropertyRef Name="WorkTimeId" />
+          </Key>
+          <Property Name="WorkTimeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkTime1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pharmacies" Relationship="Self.FK_Pharmacy_WorkTime" FromRole="WorkTime" ToRole="Pharmacy" />
+        </EntityType>
+        <Association Name="FK_Pharmacy_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Pharmacy">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pharmacy_WorkTime">
+          <End Role="WorkTime" Type="Self.WorkTime" Multiplicity="1" />
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTime">
+              <PropertyRef Name="WorkTimeId" />
+            </Principal>
+            <Dependent Role="Pharmacy">
+              <PropertyRef Name="WorkTimeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicePharmacy_Pharmacy">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="1" />
+          <End Role="ServicePharmacy" Type="Self.ServicePharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="PharmacyId" />
+            </Principal>
+            <Dependent Role="ServicePharmacy">
+              <PropertyRef Name="PharmacyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicePharmacy_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServicePharmacy" Type="Self.ServicePharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceId" />
+            </Principal>
+            <Dependent Role="ServicePharmacy">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PharmacyDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Pharmacies" EntityType="Self.Pharmacy" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <EntitySet Name="ServicePharmacies" EntityType="Self.ServicePharmacy" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="WorkTimes" EntityType="Self.WorkTime" />
+          <AssociationSet Name="FK_Pharmacy_Category" Association="Self.FK_Pharmacy_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Pharmacy" EntitySet="Pharmacies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pharmacy_WorkTime" Association="Self.FK_Pharmacy_WorkTime">
+            <End Role="WorkTime" EntitySet="WorkTimes" />
+            <End Role="Pharmacy" EntitySet="Pharmacies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicePharmacy_Pharmacy" Association="Self.FK_ServicePharmacy_Pharmacy">
+            <End Role="Pharmacy" EntitySet="Pharmacies" />
+            <End Role="ServicePharmacy" EntitySet="ServicePharmacies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicePharmacy_Service" Association="Self.FK_ServicePharmacy_Service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="ServicePharmacy" EntitySet="ServicePharmacies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PharmacyDBModelContainer" CdmEntityContainer="PharmacyDBEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="PharmacyDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pharmacies">
+            <EntityTypeMapping TypeName="PharmacyDBModel.Pharmacy">
+              <MappingFragment StoreEntitySet="Pharmacy">
+                <ScalarProperty Name="PharmacyId" ColumnName="PharmacyId" />
+                <ScalarProperty Name="PharmacyName" ColumnName="PharmacyName" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="WorkTimeId" ColumnName="WorkTimeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="PharmacyDBModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicePharmacies">
+            <EntityTypeMapping TypeName="PharmacyDBModel.ServicePharmacy">
+              <MappingFragment StoreEntitySet="ServicePharmacy">
+                <ScalarProperty Name="ServicePharmacyId" ColumnName="ServicePharmacyId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="PharmacyId" ColumnName="PharmacyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PharmacyDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PharmacyDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkTimes">
+            <EntityTypeMapping TypeName="PharmacyDBModel.WorkTime">
+              <MappingFragment StoreEntitySet="WorkTime">
+                <ScalarProperty Name="WorkTimeId" ColumnName="WorkTimeId" />
+                <ScalarProperty Name="WorkTime1" ColumnName="WorkTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

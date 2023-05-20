@@ -1,0 +1,45 @@
+﻿<Window x:Class="EduInstitutesApp.Windows.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:EduInstitutesApp.Windows"
+          mc:Ignorable="d" 
+        
+         Title="{Binding ElementName=MainFrame, Path=Content.Title}" 
+        Height="800" Width="900" MinHeight="800" MinWidth="800" WindowStartupLocation="CenterScreen" Icon="/EduInstitutesApp;component/Resources/79medicalbag.png"
+         >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid />
+        <!--<Image  Source="/EduInstitutesApp;component/Resources/applicationseducation.png"
+               Margin="10" 
+               HorizontalAlignment="Left"/>-->
+        <materialDesign:PackIcon  Grid.Row="0" Grid.Column="0" Kind="Hotel" 
+                                  Foreground="{StaticResource PrimaryHueDarkBrush}" 
+                                  VerticalAlignment="Center" 
+                                  Margin="30 0" Height="40" Width="50"/>
+        <TextBlock Grid.Row="0" Text="Отели" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   FontSize="20"
+                   FontWeight="Bold"/>
+        <Frame x:Name="MainFrame" Grid.Row="1"
+               NavigationUIVisibility="Hidden"
+               BorderThickness="1" ContentRendered="MainFrameContentRendered"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Button x:Name="BtnServices"  Content="Услуги"  Click="BtnServicesClick"/>
+            <Button x:Name="BtnCategories"  Content="Категории" Click="BtnCategoriesClick" />
+            <Button x:Name="BtnWorkTime"  Content="Время работы"  Click="BtnWorkTime_Click"/>
+            <Button x:Name="BtnBack"  Content="Назад"   Click="BtnBackClick"/>
+        </StackPanel>
+        <Grid Grid.Row="2" />
+        
+    </Grid>
+</Window>
+

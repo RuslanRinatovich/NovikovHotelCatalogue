@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f92153b2749e428ebe7b16cc1d803d91" Name="Diagram1">
+        <EntityTypeShape EntityType="PharmacyDBModel.Category" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyDBModel.Pharmacy" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyDBModel.Service" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyDBModel.ServicePharmacy" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyDBModel.User" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyDBModel.WorkTime" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="PharmacyDBModel.FK_Pharmacy_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyDBModel.FK_Pharmacy_WorkTime" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyDBModel.FK_ServicePharmacy_Pharmacy" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyDBModel.FK_ServicePharmacy_Service" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
