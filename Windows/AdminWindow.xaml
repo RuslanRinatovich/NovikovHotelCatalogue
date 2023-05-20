@@ -8,7 +8,7 @@
           mc:Ignorable="d" 
         
          Title="{Binding ElementName=MainFrame, Path=Content.Title}" 
-        Height="800" Width="900" MinHeight="800" MinWidth="800" WindowStartupLocation="CenterScreen" Icon="/EduInstitutesApp;component/Resources/79medicalbag.png"
+        Height="800" Width="900" MinHeight="800" MinWidth="800" WindowStartupLocation="CenterScreen" Icon="/EduInstitutesApp;component/Resources/3671797_hotel_location_icon.ico"
          >
     <Grid>
         <Grid.RowDefinitions>
